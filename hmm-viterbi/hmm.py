@@ -26,7 +26,7 @@ class HMM:
         """
         self.num_states = num_states
         self.states = [GaussianMixture(n_components=num_mixtures, covariance_type='diag', 
-            init_params='kmeans', max_iter=10) for state_id in range(self.num_states)]
+            init_params='kmeans', max_iter=100) for state_id in range(self.num_states)]
 
         # Initialise transition probability for a left-to-right no-skip HMM
         # For a 3-state HMM, this looks like

@@ -79,8 +79,6 @@ def eval_HMMs(hmm_set, file_list, feature_type='fbank'):
                 maximum_likelihood = log_prob
                 # STEP 3. Save the recognised digit label (e.g. '1') in "rec"
                 rec = DIGITS[i]
-        # Save recognised label in re_labels
-        rec_labels = np.append(rec_labels, rec)
 
         # Save recognised label in re_labels
         rec_labels = np.append(rec_labels, rec)
