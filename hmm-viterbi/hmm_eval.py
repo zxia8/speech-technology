@@ -9,6 +9,9 @@
 import numpy as np
 import scipy.io.wavfile as wav
 import os, pickle
+
+from numpy import inf
+
 import speechtech.frontend as feat
 
 
@@ -67,11 +70,17 @@ def eval_HMMs(hmm_set, file_list, feature_type='fbank'):
         # ====>>>> FILL WITH YOUR CODE HERE FOLLOWING THE STEPS BELOW.
         # ====>>>>
 
-        # STEP 1. Compute log-likelihood from each HMM
-
-        # STEP 2. Select the HMM that has the maximum likelihood
-
-        # STEP 3. Save the recognised digit label (e.g. '1') in "rec"
+        maximum_likelihood = -inf
+        for i in range(len(hmm_set)):
+            # STEP 1. Compute log-likelihood from each HMM
+            log_prob = hmm_set[i].viterbi_decoding(features)[0]
+            # STEP 2. Select the HMM that has the maximum likelihood
+            if maximum_likelihood <= log_prob:
+                maximum_likelihood = log_prob
+                # STEP 3. Save the recognised digit label (e.g. '1') in "rec"
+                rec = DIGITS[i]
+        # Save recognised label in re_labels
+        rec_labels = np.append(rec_labels, rec)
 
         # Save recognised label in re_labels
         rec_labels = np.append(rec_labels, rec)
