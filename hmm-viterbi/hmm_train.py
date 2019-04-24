@@ -28,6 +28,7 @@ NUM_STATES = 10  # number of HMM states
 NUM_MIXTURES = 3  # number of Gaussian mixtures per state
 NUM_ITERATIONS = 20  # number of training iterations
 FEATURE_TYPE = 'mfcc'  # 'fbank' or 'mfcc'
+# FEATURE_TYPE = 'fbank'
 MODEL_DIR = 'models'
 if not os.path.exists(MODEL_DIR):
     os.makedirs(MODEL_DIR)

@@ -84,15 +84,16 @@ class HMM:
 
             # STEP 2. Select the previous best state from all transitions into a state
 
-            best_previous = np.argmax(probs, 1)
+            best_ps = np.argmax(probs, 1)
 
             # STEP 3. Record back-trace information in back_pointers
 
-            back_pointers[:, t] = best_previous
+            back_pointers[:, t] = best_ps
 
             # STEP 4. Add output probs to previous best probs
 
-            probs = np.max((probs + log_outp[:, t]), 1)
+            best_pp = np.max(probs, 1)
+            probs = best_pp + log_outp[:, t]
 
         # -----------------------------------------------------------------
         # SAVE THE GLOBAL LOG LIKELIHOOD IN log_prob AS A RETURN VALUE.

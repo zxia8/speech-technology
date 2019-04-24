@@ -28,6 +28,7 @@ TEST_LIST = '{0}/flists/flist_test.txt'.format(DATA_DIR)
 NUM_STATES = 10  # number of HMM states
 NUM_MIXTURES = 3  # number of Gaussian mixtures per state
 FEATURE_TYPE = 'mfcc'  # 'fbank' or 'mfcc'
+# FEATURE_TYPE = 'fbank'
 MODEL_DIR = 'models'
 MODEL_FILE = os.path.join(MODEL_DIR, "hmmfile_{0}_{1}states_{2}mix".format(FEATURE_TYPE, NUM_STATES, NUM_MIXTURES))
 
