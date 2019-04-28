@@ -6,8 +6,6 @@
 # =================================================================
 # GENERAL IMPORTS
 # =================================================================
-from collections import Counter
-
 import numpy as np
 import scipy.io.wavfile as wav
 import os, pickle
@@ -90,16 +88,21 @@ def viterbi_train(hmm, feature_list):
             total_errors += log_prob
 
             # ----- Accumulate statistics based on the alignment
-            # For each state, accumulate assigned observations and state 
+            # For each state, accumulate assigned observations and state
             # transitions
             # ====>>>>
             # ====>>>> FILL WITH YOUR CODE HERE
             # ====>>>>
-            segs = np.array_split(np.arange(len(feature_list[n])), hmm.num_states)
-            c = Counter(state_seq)
+            count = {}
+            for i in range(len(state_seq)):
+                if state_seq[i] not in count:
+                    count[state_seq[i]] = [1, i]
+                count[state_seq[i]][0] += 1
+
             for s in range(hmm.num_states):
-                state_obs[s] = np.concatenate((state_obs[s], feature_list[n][segs[s], :]), axis=0)
-                state_trans[s] += c[s]
+                state_trans[s] += count[s][0]
+                index = count[s][1]
+                state_obs[s] = np.concatenate((state_obs[s], feature_list[n][index:index + count[s][0]]), axis=0)
         # ------------------------------------------------------
         # Update output pdfs and transition probabilities
         # ------------------------------------------------------
